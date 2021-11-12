@@ -1,5 +1,11 @@
-.hidden {
-  display: none;
+* {
+  --board-size: 80vw;
+}
+
+@media (orientation: landscape) {
+  * {
+    --board-size: 50vh;
+  }
 }
 
 body {
@@ -14,7 +20,6 @@ body {
 }
 
 .board {
-  --board-size: 50vh;
   display: flex;
   background-color: rgb(189, 147, 249);
   justify-content: space-between;
