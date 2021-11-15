@@ -5,6 +5,16 @@ import { cross, circle } from "./figures.js";
 let turn = 0;
 let crosses = 0;
 let circles = 0;
+const winningCombinations = [
+  "1,1,1,0,0,0,0,0,0",
+  "0,0,0,1,1,1,0,0,0",
+  "0,0,0,0,0,0,1,1,1",
+  "1,0,0,1,0,0,1,0,0",
+  "0,1,0,0,1,0,0,1,0",
+  "0,0,1,0,0,1,0,0,1",
+  "1,0,0,0,1,0,0,0,1",
+  "0,0,1,0,1,0,1,0,0",
+];
 
 //Adding listener to the squares
 const squares = document.querySelectorAll(".board__square");
@@ -62,9 +72,34 @@ function clear(event) {
 }
 
 function play(e) {
-  if (turn < 6 || circles < 3 || crosses < 3) {
-    write(e);
-  } else {
-    clear(e);
+  if (turn !== false) {
+    const player = turn % 2 === 0 ? "cross" : "circle";
+
+    if (turn < 6 || circles < 3 || crosses < 3) {
+      write(e);
+      if (turn >= 5) {
+        const squares = document.querySelectorAll(".board__square");
+        const status = [];
+        for (let square of squares) {
+          if (
+            square.innerHTML &&
+            square.children[0].classList.contains(player)
+          ) {
+            status.push(1);
+          } else {
+            status.push(0);
+          }
+        }
+        if (winningCombinations.indexOf(status.join()) !== -1) {
+          turn = false;
+          const winnerTiles = document.querySelectorAll(`.${player}`);
+          for (let tile of winnerTiles) {
+            tile.classList.add("winner");
+          }
+        }
+      }
+    } else {
+      clear(e);
+    }
   }
 }
