@@ -47,6 +47,7 @@ body {
   --figure-size: calc((var(--board-size) / 3) * 0.7);
   height: var(--figure-size);
   width: var(--figure-size);
+  animation: add-figure 0.1s linear;
 }
 
 .board__square .circle {
@@ -103,6 +104,17 @@ body {
   animation: bounceIn 1s, blinker 1s infinite;
 }
 
+.fade {
+  opacity: 0.5;
+  animation: fader 1s infinite;
+}
+
+@keyframes fader {
+  50% {
+    opacity: 0.1;
+  }
+}
+
 @keyframes blinker {
   60% {
     transform: scale(1.1);
@@ -131,5 +143,16 @@ body {
   100% {
     opacity: 1;
     transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes add-figure {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
