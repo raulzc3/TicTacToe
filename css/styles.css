@@ -109,6 +109,12 @@ body {
   animation: fader 1s infinite;
 }
 
+.delete {
+  transition: 0.3s;
+  transform: scale(0);
+  opacity: 0;
+}
+
 @keyframes fader {
   50% {
     opacity: 0.1;

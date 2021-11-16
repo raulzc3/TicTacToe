@@ -27,14 +27,20 @@ for (let square of squares) {
 }
 //Rematch button listener
 document.querySelector(".rematch").onclick = (e) => {
-  for (let square of squares) {
-    if (square.innerHTML !== "") {
-      square.innerHTML = "";
-    }
-    turn = 0;
-    circles = 0;
-    crosses = 0;
+  const figures = document.querySelectorAll(".figure");
+  for (let figure of figures) {
+    figure.classList.add("delete");
   }
+
+  setTimeout(() => {
+    for (let figure of figures) {
+      figure.parentElement.removeChild(figure);
+    }
+  }, 400);
+
+  turn = 0;
+  circles = 0;
+  crosses = 0;
 };
 
 function write(event) {
@@ -63,18 +69,28 @@ function clear() {
 }
 
 function fade(event) {
+  const target = event.target;
+
   if (turn % 2 === 0) {
-    const figure = event.target.closest(".cross");
+    const figure = target.closest(".cross");
     if (figure) {
       figure.classList.add("fade");
       prevTile = figure.parentNode;
       crosses--;
+      target.onclick = (e) => {
+        e.currentTarget.classList.remove("fade");
+        crosses++;
+      };
     }
   } else {
-    if (event.target.classList.contains("circle")) {
-      event.target.classList.add("fade");
-      prevTile = event.target.parentNode;
+    if (target.classList.contains("circle")) {
+      target.classList.add("fade");
+      prevTile = target.parentNode;
       circles--;
+      target.onclick = (e) => {
+        e.currentTarget.classList.remove("fade");
+        circles++;
+      };
     }
   }
 }
@@ -107,7 +123,7 @@ function play(e) {
         checkWinner(player);
       }
     } else {
-      fade(e, player);
+      fade(e);
     }
   }
 }
