@@ -4,9 +4,9 @@ import { cross, circle } from "./figures.js";
 //Global variables
 let turn = 0;
 let prevTile = null;
-let clearEvent = null;
 let crosses = 0;
 let circles = 0;
+let winner = false;
 const winningCombinations = [
   "1,1,1,0,0,0,0,0,0",
   "0,0,0,1,1,1,0,0,0",
@@ -37,11 +37,29 @@ document.querySelector(".rematch").onclick = (e) => {
       figure.parentElement.removeChild(figure);
     }
   }, 400);
-
+  winner = false;
   turn = 0;
   circles = 0;
   crosses = 0;
+  togglePlayer("cross");
 };
+
+document.querySelector(".player").appendChild(cross("example"));
+
+function togglePlayer(player) {
+  const playerTile = document.querySelector(".player");
+  if (player) {
+    playerTile.children[0].classList.add("delete");
+    setTimeout(() => {
+      playerTile.removeChild(playerTile.children[0]);
+      if (player === "cross") {
+        playerTile.appendChild(cross("example"));
+      } else if (player === "circle") {
+        playerTile.appendChild(circle("example"));
+      }
+    }, 200);
+  }
+}
 
 function write(event) {
   if (event.target === event.currentTarget) {
@@ -50,9 +68,11 @@ function write(event) {
       if (turn % 2 === 0) {
         square.append(cross());
         crosses++;
+        togglePlayer("circle");
       } else {
         square.append(circle());
         circles++;
+        togglePlayer("cross");
       }
       if (prevTile) {
         prevTile = null;
@@ -77,20 +97,12 @@ function fade(event) {
       figure.classList.add("fade");
       prevTile = figure.parentNode;
       crosses--;
-      target.onclick = (e) => {
-        e.currentTarget.classList.remove("fade");
-        crosses++;
-      };
     }
   } else {
     if (target.classList.contains("circle")) {
       target.classList.add("fade");
       prevTile = target.parentNode;
       circles--;
-      target.onclick = (e) => {
-        e.currentTarget.classList.remove("fade");
-        circles++;
-      };
     }
   }
 }
@@ -107,16 +119,21 @@ function checkWinner(player) {
   }
   if (winningCombinations.indexOf(status.join()) !== -1) {
     turn = false;
+    winner = true;
+    togglePlayer(player);
     const winnerTiles = document.querySelectorAll(`.${player}`);
     for (let tile of winnerTiles) {
-      tile.classList.add("winner");
+      if (tile.classList.contains("figure")) {
+        tile.classList.add("winner");
+      }
     }
   }
 }
 
 function play(e) {
-  if (turn !== false) {
+  if (!winner) {
     const player = turn % 2 === 0 ? "cross" : "circle";
+
     if (circles < 3 || crosses < 3) {
       write(e);
       if (turn >= 5) {
