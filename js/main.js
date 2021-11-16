@@ -3,6 +3,8 @@ import { cross, circle } from "./figures.js";
 
 //Global variables
 let turn = 0;
+let prevTile = null;
+let clearEvent = null;
 let crosses = 0;
 let circles = 0;
 const winningCombinations = [
@@ -38,7 +40,7 @@ document.querySelector(".rematch").onclick = (e) => {
 function write(event) {
   if (event.target === event.currentTarget) {
     const square = event.target;
-    if (square.innerHTML === "") {
+    if (square !== prevTile && square.innerHTML === "") {
       if (turn % 2 === 0) {
         square.append(cross());
         crosses++;
@@ -46,27 +48,52 @@ function write(event) {
         square.append(circle());
         circles++;
       }
+      if (prevTile) {
+        prevTile = null;
+        clear();
+      }
       turn++;
     }
   }
 }
 
-function clear(event) {
+function clear() {
+  const fadingFigure = document.querySelector(".fade");
+  fadingFigure.parentNode.removeChild(fadingFigure);
+}
+
+function fade(event) {
   if (turn % 2 === 0) {
-    if (event.target.classList.contains("stick")) {
-      if (event.target.classList.contains("parent")) {
-        event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-      } else {
-        event.target.parentNode.parentNode.parentNode.removeChild(
-          event.target.parentNode.parentNode
-        );
-      }
+    const figure = event.target.closest(".cross");
+    if (figure) {
+      figure.classList.add("fade");
+      prevTile = figure.parentNode;
       crosses--;
     }
   } else {
     if (event.target.classList.contains("circle")) {
-      event.target.parentNode.removeChild(event.target);
+      event.target.classList.add("fade");
+      prevTile = event.target.parentNode;
       circles--;
+    }
+  }
+}
+
+function checkWinner(player) {
+  const squares = document.querySelectorAll(".board__square");
+  const status = [];
+  for (let square of squares) {
+    if (square.innerHTML && square.children[0].classList.contains(player)) {
+      status.push(1);
+    } else {
+      status.push(0);
+    }
+  }
+  if (winningCombinations.indexOf(status.join()) !== -1) {
+    turn = false;
+    const winnerTiles = document.querySelectorAll(`.${player}`);
+    for (let tile of winnerTiles) {
+      tile.classList.add("winner");
     }
   }
 }
@@ -74,32 +101,13 @@ function clear(event) {
 function play(e) {
   if (turn !== false) {
     const player = turn % 2 === 0 ? "cross" : "circle";
-
-    if (turn < 6 || circles < 3 || crosses < 3) {
+    if (circles < 3 || crosses < 3) {
       write(e);
       if (turn >= 5) {
-        const squares = document.querySelectorAll(".board__square");
-        const status = [];
-        for (let square of squares) {
-          if (
-            square.innerHTML &&
-            square.children[0].classList.contains(player)
-          ) {
-            status.push(1);
-          } else {
-            status.push(0);
-          }
-        }
-        if (winningCombinations.indexOf(status.join()) !== -1) {
-          turn = false;
-          const winnerTiles = document.querySelectorAll(`.${player}`);
-          for (let tile of winnerTiles) {
-            tile.classList.add("winner");
-          }
-        }
+        checkWinner(player);
       }
     } else {
-      clear(e);
+      fade(e, player);
     }
   }
 }
