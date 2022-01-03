@@ -31,7 +31,7 @@ body {
   border-radius: calc(var(--board-size) * 0.04);
 }
 
-.board__square {
+.tile {
   height: calc(var(--board-size) / 3);
   width: calc(var(--board-size) / 3);
   background-color: rgb(40, 42, 54);
@@ -59,7 +59,7 @@ body {
   border-radius: 50%;
 }
 
-.board__square .cross {
+.tile .cross {
   display: flex;
   justify-content: center;
   align-items: center;

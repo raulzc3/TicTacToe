@@ -2,11 +2,13 @@
 import { cross, circle } from "./figures.js";
 
 //Global variables
+const tiles = document.querySelectorAll(".tile");
 let turn = 0;
 let prevTile = null;
 let crosses = 0;
 let circles = 0;
 let winner = false;
+
 const winningCombinations = [
   "1,1,1,0,0,0,0,0,0",
   "0,0,0,1,1,1,0,0,0",
@@ -18,10 +20,9 @@ const winningCombinations = [
   "0,0,1,0,1,0,1,0,0",
 ];
 
-//Adding listener to the squares
-const squares = document.querySelectorAll(".board__square");
-for (let square of squares) {
-  square.onclick = (e) => {
+//Adding listener to the tiles
+for (let tile of tiles) {
+  tile.onclick = (e) => {
     play(e);
   };
 }
@@ -63,14 +64,14 @@ function togglePlayer(player) {
 
 function write(event) {
   if (event.target === event.currentTarget) {
-    const square = event.target;
-    if (square !== prevTile && square.innerHTML === "") {
+    const tile = event.target;
+    if (tile !== prevTile && tile.innerHTML === "") {
       if (turn % 2 === 0) {
-        square.append(cross());
+        tile.append(cross());
         crosses++;
         togglePlayer("circle");
       } else {
-        square.append(circle());
+        tile.append(circle());
         circles++;
         togglePlayer("cross");
       }
@@ -108,10 +109,9 @@ function fade(event) {
 }
 
 function checkWinner(player) {
-  const squares = document.querySelectorAll(".board__square");
   const status = [];
-  for (let square of squares) {
-    if (square.innerHTML && square.children[0].classList.contains(player)) {
+  for (let tile of tiles) {
+    if (tile.innerHTML && tile.children[0].classList.contains(player)) {
       status.push(1);
     } else {
       status.push(0);
