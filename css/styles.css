@@ -1,3 +1,4 @@
+/* TODO: Create main.css file with global variables and styles */
 * {
   --board-size: 80vw;
 }
@@ -80,7 +81,7 @@ body {
   transform: rotate(-90deg);
 }
 
-.rematch {
+.button {
   height: calc(var(--board-size) * 0.15);
   width: calc(var(--board-size) * 0.35);
   border-radius: calc(var(--board-size) * 0.15 * 0.25);
@@ -93,7 +94,7 @@ body {
   transition: 0.1s;
 }
 
-.rematch:hover {
+.button:hover {
   background-color: rgb(98, 114, 164);
   border-color: rgb(255, 121, 198);
   color: rgb(80, 250, 123);
