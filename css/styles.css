@@ -83,7 +83,7 @@ body {
 
 .button {
   height: calc(var(--board-size) * 0.15);
-  width: calc(var(--board-size) * 0.35);
+  min-width: calc(var(--board-size) * 0.35);
   border-radius: calc(var(--board-size) * 0.15 * 0.25);
   border: calc(var(--board-size) * 0.15 * 0.1) solid rgb(189, 147, 249);
   background-color: rgb(68, 71, 90);
