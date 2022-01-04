@@ -1,13 +1,19 @@
-const help = document.querySelector("#help");
+const help = document.querySelector(".help");
+const overlay = document.querySelector("#help");
 const openHelpButton = document.querySelector(".helpButton");
 const closeHelpButton = document.querySelector(".dismissHelp");
 
-//Todo: Add fade in and fade out animations
+//Todo: Optimize class-based animation and avoid timeout
 
 closeHelpButton.onclick = () => {
-  help.classList.add("hidden");
+  help.classList.add("delete");
+  overlay.classList.add("fading");
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+  }, 300);
 };
 
 openHelpButton.onclick = () => {
-  help.classList.remove("hidden");
+  overlay.classList.remove("fading", "hidden");
+  help.classList.remove("delete");
 };
