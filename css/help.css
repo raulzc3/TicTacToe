@@ -43,6 +43,7 @@
   right: 0;
   margin: 1rem;
   cursor: pointer;
+  transform: scale(1.5);
   filter: invert(65%) sepia(82%) saturate(1335%) hue-rotate(289deg)
     brightness(102%) contrast(101%);
 }
