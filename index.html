@@ -19,19 +19,19 @@
     <div class="helpButton" title="Show help"><img src="media/help.svg" alt="Help icon" /></div>
     <section id="help" class="overlay hidden">
         <div class="help">
-            <h1>Competitive Mode</h1>
-            <p>
+            <h1 class="translate" data-i18n="competitive_title">Competitive Mode</h1>
+            <p class="translate" data-i18n="competitive_description">
                 In this version of Tic-Tac-Toe each player has 3 "pieces".<br /><br />
                 When both players have their pieces placed,
                 they have to move them from one position to another until a winner appears.</p>
             <div class="helpForm">
                 <input type="checkbox" id="hideCompetitiveCheck" class="checkBox" />
-                <label for="hideCompetitiveCheck">Don't show on startup</label>
+                <label for="hideCompetitiveCheck" class="translate" data-i18n="help_check">Don't show on startup</label>
             </div>
-            <button class="button dismissHelp">Dismiss</button>
+            <button class="button dismissHelp translate" data-i18n="common_ok">Dismiss</button>
         </div>
     </section>
-    <div class="player__info"><span>Player</span>
+    <div class="player__info"><span class="translate" data-i18n="player">Player</span>
         <div class=" player__container player"></div>
     </div>
     <main class="board">
@@ -45,7 +45,8 @@
         <div class="tile"></div>
         <div class="tile"></div>
     </main>
-    <button class="button rematch">Restart</button></div>
+    <button class="button rematch translate" data-i18n="restart">Restart</button></div>
+    <script type="module" src="js/i18n.js"></script>
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/help.js"></script>
 </body>
