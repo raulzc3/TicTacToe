@@ -46,6 +46,8 @@
 .help .helpForm {
   /* TODO: customize checkbox */
   color: rgb(80, 250, 123);
+  cursor: default;
+  margin: 0.2rem;
 }
 
 .helpButton {
@@ -59,4 +61,8 @@
     brightness(102%) contrast(101%);
 }
 
-/* TODO: Responsive design (PC) */
+@media (orientation: landscape) {
+  .help {
+    width: calc(var(--board-size) + 2vw);
+  }
+}
