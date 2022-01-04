@@ -17,13 +17,17 @@
 
 <body>
     <div class="helpButton" title="Show help"><img src="media/help.svg" alt="Help icon" /></div>
-    <section id="help" class="overlay">
+    <section id="help" class="overlay hidden">
         <div class="help">
             <h1>Competitive Mode</h1>
             <p>
                 In this version of Tic-Tac-Toe each player has 3 "pieces".<br /><br />
                 When both players have their pieces placed,
                 they have to move them from one position to another until a winner appears.</p>
+            <div class="helpForm">
+                <input type="checkbox" id="hideCompetitiveCheck" class="checkBox" />
+                <label for="hideCompetitiveHelp">Don't show on startup</label>
+            </div>
             <button class="button dismissHelp">Dismiss</button>
         </div>
     </section>

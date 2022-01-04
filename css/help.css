@@ -43,6 +43,11 @@
   color: rgb(139, 233, 253);
 }
 
+.help .helpForm {
+  /* TODO: customize checkbox */
+  color: rgb(80, 250, 123);
+}
+
 .helpButton {
   position: absolute;
   top: 0;
@@ -54,5 +59,4 @@
     brightness(102%) contrast(101%);
 }
 
-/* TODO: Create fade in/out animations for help */
 /* TODO: Responsive design (PC) */
