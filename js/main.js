@@ -144,3 +144,11 @@ function play(e) {
     }
   }
 }
+
+console.info(
+  "Hi, there!\nIf you find bugs or you have any kind of idea to \nimprove this project, feel free to contribute\nin the repository: https://github.com/raulzc3/TicTacToe"
+);
+console.info(
+  "If you want to contact me, you can do it via LinkedIn too: https://www.linkedin.com/in/raulzc3/"
+);
+console.info("Enjoy the game! ^^");
