@@ -12,12 +12,16 @@
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/help.css">
+    <link rel="stylesheet" href="css/lang.css">
     <link rel="manifest" href="/manifest.json">
     <title>Tic-Tac-Toe</title>
 </head>
 
 <body>
+    <!-- TODO: translate titles -->
     <div class="helpButton icon" title="Show help"><img src="media/help.svg" alt="Help icon" /></div>
+    <div class="langButton icon" title="Language"><img src="media/lang.svg" alt="Language icon" /></div>
+    <!-- TODO: improve class names -->
     <section id="help" class="overlay hidden">
         <div class="help modal">
             <h1 class="translate" data-i18n="competitive_title">Competitive Mode</h1>
@@ -30,6 +34,18 @@
                 <label for="hideCompetitiveCheck" class="translate" data-i18n="help_check">Don't show on startup</label>
             </div>
             <button class="button dismissHelp translate" data-i18n="common_ok">Dismiss</button>
+        </div>
+    </section>
+
+    <section id="langSelector" class="overlay hidden">
+        <div class="help modal">
+            <h1 class="translate" data-i18n="competitive_title">Language</h1>
+            <div class="options">
+                <button class="button langOption translate" data-lang="es">Español</button>
+                <button class="button langOption translate" data-lang="gl">Galego</button>
+                <button class="button langOption translate" data-lang="en">English</button>
+
+            </div>
         </div>
     </section>
     <div class="player__info"><span class="translate" data-i18n="player">Player</span>
@@ -50,6 +66,7 @@
     <script type="module" src="js/i18n.js"></script>
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/help.js"></script>
+    <script type="module" src="js/lang.js"></script>
 </body>
 
 </html>

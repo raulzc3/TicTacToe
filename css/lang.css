@@ -1,0 +1,14 @@
+.langButton {
+  top: 0;
+  left: 0;
+}
+
+.langSelector h1 {
+  margin-bottom: 0.5rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

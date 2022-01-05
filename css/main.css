@@ -167,7 +167,12 @@ p {
   transition: 0.1s;
 }
 
-.button:hover {
+.button.selected {
+  cursor: default;
+}
+
+.button:hover,
+.button.selected {
   background-color: rgb(98, 114, 164);
   border-color: var(--pink);
   color: var(--green);
