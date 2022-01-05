@@ -3,9 +3,6 @@ const storage = window.localStorage;
 const userLang =
   window.localStorage.getItem("custom_lang") ||
   navigator.language.substring(0, 2);
-
-console.log(userLang);
-
 const availableLangs = ["es", "gl"];
 if (
   document.documentElement.lang !== userLang &&
